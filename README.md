@@ -7,7 +7,7 @@ Hemera is a development tool.
 use gem
 
 ```
-gem install Hemera
+gem install hemera
 ```
 
 ## Usage
