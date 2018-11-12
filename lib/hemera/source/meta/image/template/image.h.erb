@@ -1,0 +1,19 @@
+/**
+ * generate from Hemera
+ * https://github.com/JianweiWangs/Hemera.git
+ * JianweiWangs
+ */
+
+#import <Foundation/Foundation.h>
+
+@interface <%=@class_name%>> : NSObject
+
+<% for @image in @images %>
+  <%="@property (class, nonatamic, readonly) #{@class_name} *#{@image.name};\n"%>
+<% end %>
+
+@property (nonatamic, readonly) UIImage *light;
+
+@property (nonatamic, readonly) UIImage *dark;
+
+@end
