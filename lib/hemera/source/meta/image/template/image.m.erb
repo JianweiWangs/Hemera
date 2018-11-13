@@ -7,12 +7,20 @@
 
 <%= "#import \"#{@class_name}.h\"" %>
 
+<%= "@interface #{@class_name} ()" %>
+
+@property (nonatomic, readwrite) UIImage *light;
+
+@property (nonatomic, readwrite) UIImage *dark;
+
+@end
+
 <%= "@implementation #{@class_name}" %>
 <% for @image in @images %>
 <%= "+ (#{@class_name} *)#{@image.name} {"%>
 <%= "\t#{@class_name} *model = [#{@class_name} new];" %>
-<%= "\tmodel.light = [UIImage imageNamed:@\"#{@image.name_light}\";" %>
-<%= "\tmodel.dark = [UIImage imageNamed:@\"#{@image.name_dark}\";" %>
+<%= "\tmodel.light = [UIImage imageNamed:@\"#{@image.name_light}\"];" %>
+<%= "\tmodel.dark = [UIImage imageNamed:@\"#{@image.name_dark}\"];" %>
 <%= "\treturn model;" %>
 <%= "}" %>
 <% end %>

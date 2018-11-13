@@ -43,7 +43,7 @@ module Hemera
             lights << name
           end
         end
-        lights.map do |name|
+        lights.uniq.map do |name|
           field_name = name.gsub(/[\s.-]/, '_')
           light = name
           dark = darks.include?(name) ? 'night_' + name : name

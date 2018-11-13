@@ -5,14 +5,14 @@
  * <%=@class_name%>.h
  */
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface <%=@class_name%> : NSObject
-<% for @image in @images %>
-<%= "@property (class, nonatomic, readonly) #{@class_name} *#{@image.name};" %>
-<% end %>
+
 @property (nonatomic, readonly) UIImage *light;
 
 @property (nonatomic, readonly) UIImage *dark;
-
+<% for @image in @images %>
+<%= "@property (class, nonatomic, readonly) #{@class_name} *#{@image.name};" %>
+<% end %>
 @end
