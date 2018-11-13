@@ -36,7 +36,7 @@ COMMANDS
     pod, p   - cocoapods
     xcode, x - Xcode
 ```
-use meta to generate code in future, not support for the time being.
+use meta to generate code
 ```
 hm meta
 
@@ -44,11 +44,12 @@ NAME
     meta - metaprogramming
 
 SYNOPSIS
-    hm [global options] meta img
+    hm meta img <fileName> <path>
 
 COMMANDS
     img, i - generate img code
 ```
+![command_meta](resource/meta_command.gif)
 
 use xcode subcommand can open/clean workspace
 
