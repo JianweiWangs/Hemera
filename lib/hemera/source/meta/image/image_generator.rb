@@ -5,7 +5,7 @@ module Hemera
     class ImageModel
       attr_reader :name
       attr_reader :name_light
-      attr_accessor :name_dark
+      attr_reader :name_dark
       def initialize(name, name_light, name_dark)
         @name = name
         @name_light = name_light
@@ -18,8 +18,9 @@ module Hemera
     end
     class ImageGenerator
       def initialize(output_file_name, path)
-        @output_file_name = output_file_name
+        @class_name = output_file_name
         @path = path
+        @images = image_model_of_names
       end
 
       def find_paths_of_png(path = @path)
@@ -50,15 +51,34 @@ module Hemera
         end
       end
 
+      def interface_file
+        ERB.new(File.read(File.expand_path('template/image.h.erb', __dir__))).result(binding)
+      end
+
+      def implementent_file
+        ERB.new(File.read(File.expand_path('template/image.m.erb', __dir__))).result(binding)
+      end
+
       def generate # (is_swift)
         # if is_swift
         #   puts is_swift
         # else
         # end
-        puts 'generating'
-        image_model_of_names.each do |x|
-          puts x
+
+        puts 'generating 😊'
+
+        interface_file_path = @path + '/' + @class_name + '.h'
+        implementent_file_path = @path + '/' + @class_name + '.m'
+
+        File.open(interface_file_path, 'w') do |f|
+          f.puts interface_file
         end
+
+        File.open(implementent_file_path, 'w') do |f|
+          f.puts implementent_file
+        end
+
+        puts 'generating done! 🎉'
       end
     end
   end

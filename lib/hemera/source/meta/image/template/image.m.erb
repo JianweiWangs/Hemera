@@ -1,21 +1,20 @@
 /**
-* generate from Hemera
-* https://github.com/JianweiWangs/Hemera.git
-* JianweiWangs
-* <%=@class_name%>.m
-*/
+ * generate from Hemera
+ * https://github.com/JianweiWangs/Hemera.git
+ * JianweiWangs
+ * <%=@class_name%>.h
+ */
 
-<%= "#import \"#{@class_name}.h\"\n" %>
+<%= "#import \"#{@class_name}.h\"" %>
 
-<%= "@implementation #{@class_name}\n" %>
-
+<%= "@implementation #{@class_name}" %>
 <% for @image in @images %>
-  <%= "+ (#{@class_name})#{@image.name} {\n"%>
-  <%= "\t#{@class_name} *model = [#{@class_name} new];\n" %>
-  <%= "\tmodel.light = [UIImage imageNamed:@\"#{@image.name_light}\";\n" %>
-  <%= "\tmodel.dark = [UIImage imageNamed:@\"#{@image.name_dark}\";\n" %>
-  <%= "\treturn model;" %>
-  <%= "}\n" %>
+<%= "+ (#{@class_name} *)#{@image.name} {"%>
+<%= "\t#{@class_name} *model = [#{@class_name} new];" %>
+<%= "\tmodel.light = [UIImage imageNamed:@\"#{@image.name_light}\";" %>
+<%= "\tmodel.dark = [UIImage imageNamed:@\"#{@image.name_dark}\";" %>
+<%= "\treturn model;" %>
+<%= "}" %>
 <% end %>
 @end
 
