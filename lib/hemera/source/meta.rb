@@ -1,4 +1,4 @@
-require 'hemera/source/meta/image/image'
+require 'hemera/source/meta/image/image_generator'
 module Hemera
   module Meta
     class << self
