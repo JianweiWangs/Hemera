@@ -1,5 +1,5 @@
 require 'erb'
-require 'pathname'
+require_relative 'swift'
 module Hemera
   module Generator
     class ImageModel
@@ -59,25 +59,26 @@ module Hemera
         ERB.new(File.read(File.expand_path('template/image.m.erb', __dir__))).result(binding)
       end
 
-      def generate # (is_swift)
-        # if is_swift
-        #   puts is_swift
-        # else
-        # end
-
+      def generate(is_swift = true)
         puts 'generating 😊'
+        if is_swift
+          swift_file_path = @path + '/' + @class_name + '.swift'
+          puts " #{swift_file_path} generating!"
+          File.open(swift_file_path, 'w') do |f|
+            f.puts SwiftImageGenerator.new(@class_name, @images).swift_file
+          end
+        else
+          interface_file_path = @path + '/' + @class_name + '.h'
+          implementent_file_path = @path + '/' + @class_name + '.m'
+          puts " #{interface_file_path} and #{implementent_file_path} generating!"
+          File.open(interface_file_path, 'w') do |f|
+            f.puts interface_file
+          end
 
-        interface_file_path = @path + '/' + @class_name + '.h'
-        implementent_file_path = @path + '/' + @class_name + '.m'
-
-        File.open(interface_file_path, 'w') do |f|
-          f.puts interface_file
+          File.open(implementent_file_path, 'w') do |f|
+            f.puts implementent_file
+          end
         end
-
-        File.open(implementent_file_path, 'w') do |f|
-          f.puts implementent_file
-        end
-
         puts 'generating done! 🎉'
       end
     end
