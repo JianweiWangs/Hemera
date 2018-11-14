@@ -3,12 +3,14 @@ require 'hemera/tool/log'
 desc 'metaprogramming'
 command :meta, :m do |c|
   c.desc 'generate img code'
+  c.switch :o
   c.command :img, :i do |command|
-    command.action do |_global_options, _options, args|
+    command.action do |_global_options, options, args|
+      is_swift = !options[:o]
       if args.count == 1
-        Hemera::Meta.generate(args[0])
+        Hemera::Meta.generate(args[0], is_swift)
       elsif args.count == 2
-        Hemera::Meta.generate(args[0], args[1])
+        Hemera::Meta.generate(args[0], is_swift, args[1])
       else
         Hemera.log <<-LOG
 只接受文件名及路径参数，路径参数不填默认在当前文件夹，不支持多文件夹路径

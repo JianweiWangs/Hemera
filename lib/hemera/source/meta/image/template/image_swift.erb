@@ -1,0 +1,27 @@
+/**
+ * generate from Hemera
+ * https://github.com/JianweiWangs/Hemera.git
+ * JianweiWangs
+ * <%=@struct_name%>.swift
+ */
+
+import UIKit
+struct <%= @struct_name %> {
+    private(set) lazy var dark: UIImage = {
+        return UIImage(named: darkName)!
+    }()
+    private(set) lazy var light: UIImage = {
+        return UIImage(named: lightName)!
+    }()
+    private let darkName: String
+    private let lightName: String
+    private init(darkName: String, lightName: String) {
+        self.darkName = darkName
+        self.lightName = lightName
+    }
+<% for @image in @images %>
+    <%= "public static var #{@image.name}: #{@struct_name} = {" %>
+    <%= "\treturn #{@struct_name}(darkName: \"#{@image.name_dark}\", lightName:\"#{@image.name_light}\")" %>
+    <%= "}()" %>
+<% end %>
+}
