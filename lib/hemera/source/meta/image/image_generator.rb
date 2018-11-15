@@ -1,5 +1,5 @@
-require 'erb'
 require_relative 'swift'
+require_relative 'objc'
 module Hemera
   module Generator
     class ImageModel
@@ -51,14 +51,6 @@ module Hemera
         end
       end
 
-      def interface_file
-        ERB.new(File.read(File.expand_path('template/image.h.erb', __dir__))).result(binding)
-      end
-
-      def implementent_file
-        ERB.new(File.read(File.expand_path('template/image.m.erb', __dir__))).result(binding)
-      end
-
       def generate(is_swift = true)
         puts 'generating 😊'
         if is_swift
@@ -71,12 +63,13 @@ module Hemera
           interface_file_path = @path + '/' + @class_name + '.h'
           implementent_file_path = @path + '/' + @class_name + '.m'
           puts " #{interface_file_path} and #{implementent_file_path} generating!"
+          objc_image_generator = ObjCImageGenerator.new(@class_name, @images)
           File.open(interface_file_path, 'w') do |f|
-            f.puts interface_file
+            f.puts objc_image_generator.interface_file
           end
 
           File.open(implementent_file_path, 'w') do |f|
-            f.puts implementent_file
+            f.puts objc_image_generator.implementent_file
           end
         end
         puts 'generating done! 🎉'
