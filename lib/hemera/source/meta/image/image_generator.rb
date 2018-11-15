@@ -1,4 +1,3 @@
-require 'erb'
 require_relative 'swift'
 require_relative 'objc'
 module Hemera
