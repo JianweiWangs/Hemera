@@ -1,4 +1,7 @@
 SimpleCov.start do
-  track_files 'lib/**/*.rb'
+  add_group 'lib', 'hemera/source'
+  add_filter '/template/'
+  add_filter '/command/'
   add_filter '/spec/'
+  add_filter '/tool/'
 end
