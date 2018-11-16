@@ -1,4 +1,5 @@
 # Hemera
+[![contact us](https://img.shields.io/discord/490015137181466645.svg)](https://discordapp.com/invite/RF2rWZ)
 
 Hemera is a development tool.
 
