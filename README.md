@@ -1,5 +1,9 @@
 # Hemera
+
 [![contact us](https://img.shields.io/discord/490015137181466645.svg)](https://discordapp.com/invite/RF2rWZ)
+[![Build Status](https://travis-ci.org/JianweiWangs/Hemera.svg?branch=master)](https://travis-ci.org/JianweiWangs/Hemera)
+[![codecov](https://codecov.io/gh/JianweiWangs/Hemera/branch/master/graph/badge.svg)](https://codecov.io/gh/JianweiWangs/Hemera)
+
 
 Hemera is a development tool.
 
