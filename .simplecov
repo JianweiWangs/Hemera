@@ -1,5 +1,5 @@
 SimpleCov.start do
-  add_group 'lib', 'hemera/source'
+  add_group 'Source', 'lib/hemera/source'
   add_filter '/template/'
   add_filter '/command/'
   add_filter '/spec/'
