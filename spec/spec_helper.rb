@@ -7,6 +7,11 @@ SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 require "bundler/setup"
 require "hemera"
+require 'simplecov'
+require 'codecov'
+
+SimpleCov.start
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
