@@ -56,7 +56,7 @@ SYNOPSIS
 COMMANDS
     img, i - generate img code
 ```
-![command_meta](resource/meta_command.gif)
+![command_meta](resource_md/meta_command.gif)
 
 use xcode subcommand can open/clean workspace
 
