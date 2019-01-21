@@ -21,6 +21,8 @@ module Hemera
         @class_name = output_file_name
         @path = path
         @images = image_model_of_names
+        @bundle = path[/[A-Z, a-z, 0-9]+(?=\.bundle)/]
+        @bundle_path = path.gsub(@bundle + '.bundle', '') if @bundle
       end
 
       def find_paths_of_png(path = @path)
@@ -52,18 +54,17 @@ module Hemera
       end
 
       def generate(is_swift = true)
-        puts 'generating 😊'
         if is_swift
-          swift_file_path = @path + '/' + @class_name + '.swift'
+          swift_file_path = (@bundle_path ? @bundle_path : @path + '/')  + @class_name + '.swift'
           puts " #{swift_file_path} generating!"
           File.open(swift_file_path, 'w') do |f|
-            f.puts SwiftImageGenerator.new(@class_name, @images).swift_file
+            f.puts SwiftImageGenerator.new(@class_name, @images, @bundle).swift_file
           end
         else
-          interface_file_path = @path + '/' + @class_name + '.h'
-          implementent_file_path = @path + '/' + @class_name + '.m'
+          interface_file_path = (@bundle_path ? @bundle_path : @path + '/')  + @class_name + '.h'
+          implementent_file_path = (@bundle_path ? @bundle_path : @path + '/') + @class_name + '.m'
           puts " #{interface_file_path} and #{implementent_file_path} generating!"
-          objc_image_generator = ObjCImageGenerator.new(@class_name, @images)
+          objc_image_generator = ObjCImageGenerator.new(@class_name, @images, @bundle)
           File.open(interface_file_path, 'w') do |f|
             f.puts objc_image_generator.interface_file
           end

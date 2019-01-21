@@ -6,12 +6,28 @@
  */
 
 import UIKit
+
+extension UIImage {
+<%= "\tpublic convenience init?(#{@struct_name.downcase} name: String) {"%>
+<% unless @bundle_name %>
+  <%= "\treturn UIImage(named: name)" %>
+<% else %>
+  <%= "\t\tlet bundle = Bundle(for: #{@struct_name}.Helper.self)" %>
+  <%= "\t\tlet url = bundle.url(forResource: \"#{@bundle_name}\", withExtension: \"bundle\")" %>
+  <%= "\t\tguard let availableURL = url else { return nil }" %>
+  <%= "\t\tlet resourceBundle = Bundle(url: availableURL)" %>
+  <%= "\t\tself.init(named: name, in: resourceBundle, compatibleWith: nil)" %>
+<% end %>
+    }
+}
+
 struct <%= @struct_name %> {
+    fileprivate class Helper {}
     private(set) lazy var dark: UIImage = {
-        return UIImage(named: darkName)!
+        return UIImage(<%= "#{@struct_name.downcase}" %>: darkName)!
     }()
     private(set) lazy var light: UIImage = {
-        return UIImage(named: lightName)!
+        return UIImage(<%= "#{@struct_name.downcase}" %>: lightName)!
     }()
     private let darkName: String
     private let lightName: String
@@ -25,3 +41,4 @@ struct <%= @struct_name %> {
     <%= "}()" %>
 <% end %>
 }
+
