@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hemera (0.4.0)
+    hemera (0.5.0)
       gli (~> 2.18)
 
 GEM
@@ -112,4 +112,4 @@ DEPENDENCIES
   rspec (~> 3.0)
 
 BUNDLED WITH
-   1.17.1
+   1.17.2
